@@ -29,7 +29,8 @@ class CategoryForm
                 TextInput::make('slug')
                         ->label(__('resource.category.fields.slug'))
                         ->required()
-                        ->unique(ignoreRecord: true),
+                        ->unique(ignoreRecord: true)
+                        ->placeholder('Este campo se rellena solo'),
                         
 
                 /*Select::make('parent_id')

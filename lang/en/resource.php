@@ -1,5 +1,16 @@
 <?php
 return[
+      //common lang keys
+    'created_at' => "Created At",
+    'updated_at' => "Updated At",
+     // notifications.
+    'notification' => [
+        'success' => [
+            'default_title' => "Sucess",
+            'default_body' => "Action Completed Successfully."
+        ]
+    ],
+
     //category la navegacion que puede ser una matriz 
     //luego campos que seran una matriz
     //primero sera la etiqueta digamos cual sera la categoria
@@ -17,21 +28,10 @@ return[
             'description' => "Description",
             "status" => "Status"
         ],
-        /*'action' => [
+        'action' => [
             'toggle' => "Toggle"
-        ],
-        'notification' => [
-            'toggle_status' => [
-                'success' => [
-                    'title' => 'Category status updated',
-                    'body'  => 'The selected categories have been updated successfully.',
-                ],
-                'error' => [
-                    'title' => 'Update failed',
-                    'body'  => 'Unable to update category statuses. Please try again.',
-                ],
-            ],
-        ],*/
+        
+        ]
     ]
     ]; 
 

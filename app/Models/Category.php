@@ -30,4 +30,14 @@ class Category extends Model
     {
         return $this->hasMany(self::class);
     }
+    public function posts(): BelongsToMany
+    {
+        return $this->belongsToMany(Post::class, 'category_posts');
+    }
+
+    // scopes
+    public function scopeActive($query)
+    {
+        return $query->where('active', true);
+    }
 }

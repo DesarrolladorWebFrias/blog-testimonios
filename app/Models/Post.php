@@ -12,11 +12,25 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Post extends Model
 {
     protected $guarded =[];
+    protected $casts =[];
 
     public function parent() :BelongsTo
     {
         return $this->belongsTo(self::class);
+
     }
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
+     public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class, 'category_posts');
+    }
+    
+
 
   /*  protected $casts =[
         'status' => PostStatus::class,
@@ -24,14 +38,7 @@ class Post extends Model
         'meta_keywords' => "json"
     ];
 
-    public function parent() :BelongsTo
-    {
-        return $this->belongsTo(self::class);
-    }
-    public function author(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
+   
 
      public function categories(): BelongsToMany
     {

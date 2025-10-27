@@ -7,6 +7,7 @@ use App\PostType;
 use App\PostStatus;
 use Illuminate\Support\Str;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Grid;
@@ -82,6 +83,13 @@ class PostForm
                                 ->options(PostStatus::class)
                                 ->default(PostStatus::DRAFT->value)
                                 ->native(false),
+
+                             CheckboxList::make('categories')
+                                            ->label(__('resource.post.fields.categories'))
+                                            ->relationship('categories', 'name', fn($query) => $query->active())
+                                            ->searchable()
+                                            ->bulkToggleable()
+                                            ->columns(1),    
 
                             DateTimePicker::make('published_at')
                                             ->label(__('resource.post.fields.published_at'))

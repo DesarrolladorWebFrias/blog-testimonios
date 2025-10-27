@@ -64,5 +64,14 @@ return [
             'author' => "Autor",
             'view_count' => "Vistas"
         ]
+        ],
+         //post resource
+    'post' => [
+        'navigation' => [
+            'label' => "Publicación",
+            'model_label' => "Publicación",
+            'plural_model_label' => "Publicaciones"
+        ],
+
     ]
 ];

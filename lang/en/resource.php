@@ -1,23 +1,26 @@
 <?php
-return[
-      //common lang keys
+return [
+    //common lang keys
     'created_at' => "Created At",
     'updated_at' => "Updated At",
-     // notifications.
+
+    // navigation groups
+    'navigation' => [
+        "group" => [
+            'cms' => "CMS"
+        ]
+    ],
+    // notifications.
     'notification' => [
         'success' => [
             'default_title' => "Sucess",
             'default_body' => "Action Completed Successfully."
         ]
     ],
-
-    //category la navegacion que puede ser una matriz 
-    //luego campos que seran una matriz
-    //primero sera la etiqueta digamos cual sera la categoria
-   // category
+    // category
     'category' => [
         'navigation' => [
-            'label' => "Category",  
+            'label' => "Category",
             'model_label' => "Category",
             'plural_model_label' => "Category"
         ],
@@ -30,9 +33,76 @@ return[
         ],
         'action' => [
             'toggle' => "Toggle"
-        
+        ],
+        'notification' => [
+            'toggle_status' => [
+                'success' => [
+                    'title' => 'Category status updated',
+                    'body'  => 'The selected categories have been updated successfully.',
+                ],
+                'error' => [
+                    'title' => 'Update failed',
+                    'body'  => 'Unable to update category statuses. Please try again.',
+                ],
+            ],
+        ],
+    ],
+
+    //post resource
+    'post' => [
+        'navigation' => [
+            'label' => "Post",
+            'model_label' => "Post",
+            'plural_model_label' => "Post"
+        ],
+        'filters'=>[
+            'status' => "Filter By Status"
+        ],
+        'fields' =>[
+            'type' => "Type",
+            'title' => "Title",
+            "slug" => "Slug",
+            'exercpt' => "Excerpt",
+            'content' => "Content",
+            "feature_image" => "Image",
+            "is_featured" => "Featured",
+            "comment_status" => "Comment Status",
+            "status" => "Status",
+            "published_at" => "Published At",
+            "parent_id" => "Parent",
+            'author' => "Author",
+            'view_count' => "Views",
+            'categories' => "Categories"
         ]
-    ]
-    ]; 
+        ],
 
+        //page resource
+        'page' => [
+        'navigation' => [
+            'label' => "Page",
+            'model_label' => "Page",
+            'plural_model_label' => "Page"
+        ],
+    ],
 
+    // menu resource
+    "menu" => [
+        "navigation" => [
+            'label' => "Menu",
+            'model_label' => "Menu",
+            'plural_model_label' => "Menu"
+        ],
+        'fields' => [
+            'name' => "Menu Name",
+            "slug" => "Slug"
+        ]
+        ],
+
+        // setting resource
+        'setting'=>[
+            'company_name' => "Company Name",
+            'logo' => "Logo",
+            "header_menu" => "Header Menu",
+            "footer_menu" => "Footer Menu"
+        ]
+];

@@ -31,12 +31,12 @@ class PostForm
                         Grid::make(1)
                         ->schema([
 
-                             Select::make('type')
+                            /* Select::make('type')
                                 ->label(__('resource.post.fields.type'))
                                 ->required()
                                 ->default('post')
                                 ->options(PostType::class)
-                                ->default(PostType::POST),
+                                ->default(PostType::POST),*/
 
                              TextInput::make('title')
                                 ->label(__('resource.post.fields.title'))

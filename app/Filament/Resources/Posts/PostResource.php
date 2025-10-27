@@ -8,11 +8,14 @@ use App\Filament\Resources\Posts\Pages\ListPosts;
 use App\Filament\Resources\Posts\Schemas\PostForm;
 use App\Filament\Resources\Posts\Tables\PostsTable;
 use App\Models\Post;
+use App\PostType;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use UnitEnum;
 
 class PostResource extends Resource
 {
@@ -21,6 +24,24 @@ class PostResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'title';
+    
+
+  public static function getNavigationLabel(): string
+    {
+        return __('resource.post.navigation.label');
+    }
+
+    public static function getModelLabel(): string
+    {
+       return __('resource.post.navigation.model_label'); 
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('resource.post.navigation.plural_model_label');
+    }
+
+
 
     public static function form(Schema $schema): Schema
     {
@@ -46,5 +67,9 @@ class PostResource extends Resource
             'create' => CreatePost::route('/create'),
             'edit' => EditPost::route('/{record}/edit'),
         ];
+    }
+      public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('type',PostType::POST->value);
     }
 }

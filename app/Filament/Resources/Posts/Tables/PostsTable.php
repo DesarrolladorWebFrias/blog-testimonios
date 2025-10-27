@@ -42,6 +42,10 @@ class PostsTable
                     ->label(__('resource.post.fields.is_featured'))
                     ->boolean(),
 
+                    TextColumn::make('type')
+                     ->label(__('resource.post.fields.type'))
+                     ->badge(),
+
                 TextColumn::make('status')
                     ->badge()
                     ->label(__('resource.post.fields.status')),

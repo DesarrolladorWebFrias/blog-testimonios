@@ -22,7 +22,13 @@ class PostsTable
             ->defaultSort('sort','asc')
             ->columns([
               ImageColumn::make('feature_image')
-                    ->label(__('resource.post.fields.feature_image')),
+                    ->label(__('resource.post.fields.feature_image'))
+                     ->disk('public') // Asegura que está usando el disco público
+                      // Esto genera la URL correcta: /storage/posts/featured-images/{nombre_del_archivo}.
+                    ->url(fn (string $state): ?string => $state ? url('storage/posts/featured-images/' . $state) : null)
+                   
+                    ->height(40) // Ajusta la altura de la imagen en la tabla
+                    ->square(), // Asegura que la imagen se muestre como un cuadrado (opcional, pero mejora el aspecto)
 
                 TextColumn::make('title')
                     ->searchable()

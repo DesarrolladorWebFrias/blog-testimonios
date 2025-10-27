@@ -114,6 +114,8 @@ class PostForm
                                                 '4:3',
                                                 '1:1',
                                             ])
+                                            ->visibility('public') 
+                                            ->disk('public')
                                             ->directory('posts/featured-images')
                                             ->maxSize(2048)
                                             ->helperText('Max 2MB. Recommended: 1200x630px'),

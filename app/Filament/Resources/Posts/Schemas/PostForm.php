@@ -10,6 +10,7 @@ use Filament\Schemas\Schema;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
@@ -69,7 +70,11 @@ class PostForm
                         ]) ,
                         
                         Grid::make(1)
+                          ->columnSpan(1)
                           ->schema([
+                              
+                             Section::make('Publish')
+                                    ->schema([
 
                            Select::make('status')
                                 ->label(__('resource.post.fields.status'))
@@ -78,38 +83,63 @@ class PostForm
                                 ->default(PostStatus::DRAFT->value)
                                 ->native(false),
 
-                            
-                           FileUpload::make('feature_image')
-                                 ->label(__('resource.post.fields.feature_image'))
-                                 ->image(),
+                            DateTimePicker::make('published_at')
+                                            ->label(__('resource.post.fields.published_at'))
+                                            ->default(now())
+                                            ->required()
+                                            ->native(false),    
 
-                          Toggle::make('is_featured')
-                                 ->label(__('resource.post.fields.is_featured'))
-                                 ->required(),
+                             Toggle::make('is_featured')
+                                            ->label(__('resource.post.fields.is_featured'))
+                                            ->default(false)
+                                            ->inline(false),
 
-                          Toggle::make('comment_status')
-                                ->label(__('resource.post.fields.comment_status'))
-                                ->required(),
- 
+                             Toggle::make('comment_status')
+                                            ->label(__('resource.post.fields.comment_status'))
+                                            ->default(true)
+                                            ->inline(false),    
+                                 ])  
+                                 ->compact(), 
+                                 
+                                 
+
+                             Section::make('Featured Image')
+                                    ->schema([
+                                        FileUpload::make('feature_image')
+                                            ->label(__('resource.post.fields.feature_image'))
+                                            ->image()
+                                            ->imageEditor()
+                                            ->imageEditorAspectRatios([
+                                                '16:9',
+                                                '4:3',
+                                                '1:1',
+                                            ])
+                                            ->directory('posts/featured-images')
+                                            ->maxSize(2048)
+                                            ->helperText('Max 2MB. Recommended: 1200x630px'),
+                                    ])
+                                    ->collapsible()
+                                    ->compact(),
+
                           
 
-                          DateTimePicker::make('published_at')
-                                ->label(__('resource.post.fields.published_at'))
-                                ->default(now())
-                                ->displayFormat('Y-m-d H:i:s') 
-                               // Opcional: Esto garantiza que el selector de tiempo se muestre
-                                ->native(false)
-                                ->required(),
+                        Section::make('Organization')
+                                    ->schema([  
+ 
 
                           Select::make('parent_id')
-                                 ->relationship('parent', 'title')
-                                 ->searchable()
-                                ->label(__('resource.post.fields.parent_id'))
-                                ->placeholder('Select parent post')
-                                ->native(false),
+                                            ->relationship('parent', 'title')
+                                            ->searchable()
+                                            ->label(__('resource.post.fields.parent_id'))
+                                            ->placeholder('Select parent post')
+                                            ->native(false),
+                                    ])
+                                     ->collapsible()
+                                    ->collapsed()
+                                    ->compact(),
 
+                        
                           ])
-                          
 
 
                     ]),

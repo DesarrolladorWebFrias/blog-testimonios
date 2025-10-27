@@ -2,12 +2,15 @@
 
 namespace App\Filament\Resources\Posts\Tables;
 
+use App\PostStatus;
+
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class PostsTable
@@ -15,35 +18,54 @@ class PostsTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->reorderable('sort')
+            ->defaultSort('sort','asc')
             ->columns([
+              ImageColumn::make('feature_image')
+                    ->label(__('resource.post.fields.feature_image')),
+
                 TextColumn::make('title')
-                    ->searchable(),
+                    ->searchable()
+                    ->label(__('resource.post.fields.title')),
+
                 TextColumn::make('slug')
-                    ->searchable(),
-                ImageColumn::make('feature_image'),
+                    ->searchable()
+                    ->label(__('resource.post.fields.slug')),
+
                 IconColumn::make('is_featured')
+                    ->label(__('resource.post.fields.is_featured'))
                     ->boolean(),
-                TextColumn::make('type')
-                    ->searchable(),
+
                 TextColumn::make('status')
-                    ->searchable(),
+                    ->badge()
+                    ->label(__('resource.post.fields.status')),
+
                 TextColumn::make('published_at')
                     ->dateTime()
-                    ->sortable(),
-                TextColumn::make('author_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('parent_id')
-                    ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->label(__('resource.post.fields.published_at'))
+                    ->toggleable(isToggledHiddenByDefault: false),
+
+                TextColumn::make('author.name')
+                    ->label(__('resource.post.fields.author'))
+                    ->badge()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
+                TextColumn::make('parent.title')
+                    ->label(__('resource.post.fields.parent_id'))
+                    ->toggleable(isToggledHiddenByDefault: true),
+
                 IconColumn::make('comment_status')
-                    ->boolean(),
-                TextColumn::make('sort')
-                    ->numeric()
-                    ->sortable(),
+                    ->boolean()
+                    ->label(__('resource.post.fields.comment_status'))
+                    ->toggleable(isToggledHiddenByDefault: true),
+
                 TextColumn::make('view_count')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->label(__('resource.post.fields.view_count'))
+                    ->toggleable(isToggledHiddenByDefault: true),
+
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -54,7 +76,9 @@ class PostsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('status')
+                    ->label(__('resource.post.filters.status'))
+                    ->options(PostStatus::class)
             ])
             ->recordActions([
                 EditAction::make(),

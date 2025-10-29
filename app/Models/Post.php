@@ -12,33 +12,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Post extends Model
 {
     protected $guarded =[];
-    protected $casts =[];
 
-    public function parent() :BelongsTo
-    {
-        return $this->belongsTo(self::class);
-
-    }
-    public function author(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-
-     public function categories(): BelongsToMany
-    {
-        return $this->belongsToMany(Category::class, 'category_posts');
-    }
-    
-
-
-  /*  protected $casts =[
+    protected $casts =[
         'status' => PostStatus::class,
         'type' => PostType::class,
         'meta_keywords' => "json"
     ];
 
-   
+    public function parent() :BelongsTo
+    {
+        return $this->belongsTo(self::class);
+    }
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
      public function categories(): BelongsToMany
     {
@@ -54,5 +42,4 @@ class Post extends Model
     {
         return $query->where('type',PostType::PAGE);
     }
-*/
-} 
+}

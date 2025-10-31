@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\View\MenuComposer;
 use Illuminate\Support\ServiceProvider;
+
+// 💡 ¡Añade esta línea! 
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        View::composer('layouts.app',MenuComposer::class);
     }
 }

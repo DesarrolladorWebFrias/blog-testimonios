@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Menus\Widgets;
 
+use App\Models\Menu; // <-- Asegúrate de importar el modelo Menú
 use App\Models\Category;
 use App\Models\MenuItem;
 use App\Models\Post;
@@ -14,7 +15,7 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;// <-- **CRUCIAL: Importar Model**
 use SolutionForest\FilamentTree\Actions\DeleteAction;
 use SolutionForest\FilamentTree\Actions\EditAction as ActionsEditAction;
 use SolutionForest\FilamentTree\Widgets\Tree;
@@ -108,7 +109,8 @@ class MenuItemWidget extends Tree
     {
         return [
             \SolutionForest\FilamentTree\Actions\CreateAction::make()
-                ->mutateDataUsing(function(array $data){
+          
+              ->mutateDataUsing(function(array $data){
                     $data['menu_id'] = $this->record?->id;
                     return $data;
                 }),
@@ -144,10 +146,11 @@ class MenuItemWidget extends Tree
     //{
     //    return true;
     //}
-    //protected function hasEditAction(): bool
-    //{
-    //    return true;
-    //}
+    //
+    protected function hasEditAction(): bool
+    {
+        return true;
+    }
     //protected function hasViewAction(): bool
     //{
     //    return true;

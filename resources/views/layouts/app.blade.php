@@ -14,29 +14,37 @@
     <header class="bg-white shadow-sm">
         <nav class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
-                <!-- Logo -->
-                <div class="text-2xl font-bold text-gray-800">MyBlog</div>
-                
+                <!-- Logo
+                <div class="text-2xl font-bold text-gray-800">Stemtech | Productos</div>-->
+                <a href="{{ url('/') }}"
+                    class="text-2xl font-extrabold text-blue-600 hover:text-blue-700 transition">
+                    STEMTECH <span class="text-gray-800 font-medium">| PRODUCTOS</span>
+                </a>
+
                 <!-- Navigation -->
                 <ul class="flex space-x-8">
-                    @foreach($mainMenuItems as $item)
-                    @if($item->children && $item->children->count())
-                    <li class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
-                        <button class="text-gray-600 hover:text-gray-900 flex items-center focus:outline-none">
-                            {{$item->title}}
-                           
-                        </button>
+                    @foreach ($mainMenuItems as $item)
+                        @if ($item->children && $item->children->count())
+                            <li class="relative" x-data="{ open: false }" @mouseenter="open = true"
+                                @mouseleave="open = false">
+                                <button class="text-gray-600 hover:text-gray-900 flex items-center focus:outline-none">
+                                    {{ $item->title }}
 
-                        <ul x-show="open" x-transition
-                            class="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md z-10 py-1">
-                            @foreach($item->children as $childItem)
-                            <li><a href="{{$item->url}}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100">{{$childItem->title}}</a></li>
-                            @endforeach
-                        </ul>
-                    </li>
-                    @else
-                    <li><a href="{{$item->url}}" class="text-gray-600 hover:text-gray-900">{{$item->title}}</a></li>
-                    @endif
+                                </button>
+
+                                <ul x-show="open" x-transition
+                                    class="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md z-10 py-1">
+                                    @foreach ($item->children as $childItem)
+                                        <li><a href="{{ $item->url }}"
+                                                class="block px-4 py-2 text-gray-600 hover:bg-gray-100">{{ $childItem->title }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @else
+                            <li><a href="{{ $item->url }}"
+                                    class="text-gray-600 hover:text-gray-900">{{ $item->title }}</a></li>
+                        @endif
                     @endforeach
                 </ul>
             </div>

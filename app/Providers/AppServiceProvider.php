@@ -3,10 +3,11 @@
 namespace App\Providers;
 
 use App\View\MenuComposer;
-use Illuminate\Support\ServiceProvider;
-
 // 💡 ¡Añade esta línea! 
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
+
+
 
 class AppServiceProvider extends ServiceProvider
 {

@@ -20,6 +20,7 @@ use SolutionForest\FilamentTree\Actions\DeleteAction;
 use SolutionForest\FilamentTree\Actions\EditAction as ActionsEditAction;
 use SolutionForest\FilamentTree\Widgets\Tree;
 use Illuminate\Support\Str;
+
 class MenuItemWidget extends Tree
 {
     protected static string $model = MenuItem::class;
